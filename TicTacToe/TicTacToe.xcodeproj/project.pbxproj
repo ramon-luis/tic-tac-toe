@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FC62F62A1E49470100CC365B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F6291E49470100CC365B /* AppDelegate.swift */; };
-		FC62F62C1E49470100CC365B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F62B1E49470100CC365B /* ViewController.swift */; };
+		FC62F62C1E49470100CC365B /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62F62B1E49470100CC365B /* GameViewController.swift */; };
 		FC62F62F1E49470100CC365B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC62F62D1E49470100CC365B /* Main.storyboard */; };
 		FC62F6311E49470100CC365B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC62F6301E49470100CC365B /* Assets.xcassets */; };
 		FC62F6341E49470100CC365B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC62F6321E49470100CC365B /* LaunchScreen.storyboard */; };
@@ -18,12 +18,13 @@
 		FCDC1F841E5253ED0029D8A9 /* placed.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCDC1F7E1E5253ED0029D8A9 /* placed.wav */; };
 		FCDC1F851E5253ED0029D8A9 /* goodMove.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCDC1F7F1E5253ED0029D8A9 /* goodMove.wav */; };
 		FCDC1F861E5253ED0029D8A9 /* badMove.wav in Resources */ = {isa = PBXBuildFile; fileRef = FCDC1F801E5253ED0029D8A9 /* badMove.wav */; };
+		FCDC1F891E52724C0029D8A9 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC1F881E52724C0029D8A9 /* SplashViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FC62F6261E49470100CC365B /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC62F6291E49470100CC365B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FC62F62B1E49470100CC365B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FC62F62B1E49470100CC365B /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		FC62F62E1E49470100CC365B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC62F6301E49470100CC365B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC62F6331E49470100CC365B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -34,6 +35,7 @@
 		FCDC1F7E1E5253ED0029D8A9 /* placed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = placed.wav; sourceTree = "<group>"; };
 		FCDC1F7F1E5253ED0029D8A9 /* goodMove.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = goodMove.wav; sourceTree = "<group>"; };
 		FCDC1F801E5253ED0029D8A9 /* badMove.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = badMove.wav; sourceTree = "<group>"; };
+		FCDC1F881E52724C0029D8A9 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,13 +68,14 @@
 		FC62F6281E49470100CC365B /* TicTacToe */ = {
 			isa = PBXGroup;
 			children = (
-				FCDC1F871E5253F60029D8A9 /* Sounds */,
 				FC62F6291E49470100CC365B /* AppDelegate.swift */,
-				FC62F62B1E49470100CC365B /* ViewController.swift */,
+				FCDC1F881E52724C0029D8A9 /* SplashViewController.swift */,
+				FC62F62B1E49470100CC365B /* GameViewController.swift */,
 				FC62F62D1E49470100CC365B /* Main.storyboard */,
 				FC62F6301E49470100CC365B /* Assets.xcassets */,
 				FC62F6321E49470100CC365B /* LaunchScreen.storyboard */,
 				FC62F6351E49470100CC365B /* Info.plist */,
+				FCDC1F871E5253F60029D8A9 /* Sounds */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
@@ -168,7 +171,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC62F62C1E49470100CC365B /* ViewController.swift in Sources */,
+				FCDC1F891E52724C0029D8A9 /* SplashViewController.swift in Sources */,
+				FC62F62C1E49470100CC365B /* GameViewController.swift in Sources */,
 				FC62F62A1E49470100CC365B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
