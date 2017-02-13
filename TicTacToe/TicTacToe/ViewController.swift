@@ -547,7 +547,7 @@ class ViewController: UIViewController {
         // unhide blurry background & gameplay instructions
         fuzzyView.isHidden = false
         gameInfoView.isHidden = false
-        
+            
         // bring blurry background and game play insturctions to top of views
         self.view.bringSubview(toFront: fuzzyView)
         self.view.bringSubview(toFront: gameInfoView)
