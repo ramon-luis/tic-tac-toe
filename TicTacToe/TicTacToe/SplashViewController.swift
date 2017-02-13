@@ -11,7 +11,7 @@ import UIKit
 class SplashViewController: UIViewController {
 
     let imageSize = 105
-    let imageCount = 6
+    let imageCount = 5
     let maxX = 375 - 105
     var imageIndex = 0
     
@@ -45,7 +45,7 @@ class SplashViewController: UIViewController {
             newImageView.center.y += (self.view.bounds.height * 2)
         }, completion: {finished in
             self.imageIndex += 1
-            if (self.imageIndex < 10) {
+            if (self.imageIndex < imageCount) {
                 let xLocation: CGFloat = CGFloat(arc4random_uniform(UInt32(self.maxX)))
                 let image = (self.isEven(number: self.imageIndex)) ? #imageLiteral(resourceName: "TicTacToeO-Pink") : #imageLiteral(resourceName: "TicTacToeX-Blue")
                 self.animateImage(xLocation: xLocation, image: image)
