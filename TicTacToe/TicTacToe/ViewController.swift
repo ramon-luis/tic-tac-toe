@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     
     
     // TODO
-    // refactor code - handle pan action
     // extract attributions into README
     // better sound start move?
     // custom launch screen
@@ -82,6 +81,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var closeGameInfoButton: UIButton!
     
 
+    // ***********************************************************
+    // ******                VIEW DID LOAD                  ******
+    // ***********************************************************
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         startNewGame()
@@ -182,35 +185,18 @@ class ViewController: UIViewController {
             playSound(url: startMoveSound)
         }
         
-        // panning stopped: check if good move, place piece accordingly, play sound
-        if recognizer.state == UIGestureRecognizerState.ended {
-            
-            var index = 0
-            var bMoveIsDone = false
-            let lastGameSlotIndex = gameSlotViews.count //- 1
-            
+        // panning stopped: check if good move and then process move accordingly
+        if (recognizer.state == UIGestureRecognizerState.ended) {
+            // get the active piece
             if let activePiece = recognizer.view {
+                // see if good move
+                let isGoodMove = evaluateMove(movedGamePiece: activePiece)
                 
-                // check for intersection among all gameSlots
-                while (!bMoveIsDone && index < lastGameSlotIndex) {
-                    if (isInOpenGameSlot(activePiece: activePiece, index: index)) {
-                        placeGamePiece(index: index)  // place game piece
-                        bMoveIsDone = true  // set the move as done
-                        if (isGameOver()) {
-                            gameOver()
-                        } else {
-                            restoreGamePiece(movedGamePiece: activePiece, isValidMove: true)
-                            switchPlayerTurn()
-                        }
-                    } else {
-                        index += 1  // increment: check if other gameSlots contain piece
-                    }
-                }
-                
-                // bad move attempt
-                if !bMoveIsDone {
-                    restoreGamePiece(movedGamePiece: activePiece, isValidMove: false)
-                    playSound(url: badMoveSound)
+                // check if game over, otherwise complete move: restore game piece images and switch player if was good move
+                if (isGameOver()) {
+                    processGameOver()
+                } else {
+                    completeMove(movedGamePiece: activePiece, isValidMove: isGoodMove)
                 }
             }
         }
@@ -220,6 +206,27 @@ class ViewController: UIViewController {
     // ***********************************************************
     // ******       METHODS TO HANDLE PLACING PIECES        ******
     // ***********************************************************
+    
+    // checks if was a good move (places piece if it was before returning boolean)
+    private func evaluateMove(movedGamePiece: UIView) -> Bool {
+        // variables to check where piece was placed and if it was a good move
+        var index = 0
+        let lastGameSlotIndex = gameSlotViews.count
+        
+        // loop until a good move is made or all game slots have been checked
+        while (index < lastGameSlotIndex) {
+            // place piece in an open game slot or increment index to check more game slots
+            if (isInOpenGameSlot(activePiece: movedGamePiece, index: index)) {
+                placeGamePiece(index: index)  // place game piece
+                return true  // found open slot & placed piece: good move
+            } else {
+                index += 1  // increment: check if other gameSlots contain piece
+            }
+        }
+        
+        // completed loop with no match: bad move
+        return false
+    }
     
     // check if the game piece was released inside an open game slot
     private func isInOpenGameSlot(activePiece: UIView, index: Int) -> Bool {
@@ -250,17 +257,19 @@ class ViewController: UIViewController {
     }
     
     // set gamepiece back to original location
-    private func restoreGamePiece(movedGamePiece: UIView, isValidMove: Bool) {
+    private func completeMove(movedGamePiece: UIView, isValidMove: Bool) {
         // if bad move, then animate back to starting spot
         if (!isValidMove) {
+            playSound(url: badMoveSound)
             UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseInOut], animations: {
                 movedGamePiece.frame.origin.x = (self.bIsXTurn) ? self.xPieceStartX : self.oPieceStartX
                 movedGamePiece.frame.origin.y = (self.bIsXTurn) ? self.xPieceStartY : self.oPieceStartY
             }, completion: nil)
         } else {
-            // just make pieces show up at origin again
+            // just make pieces show up at origin again and switch players
             movedGamePiece.frame.origin.x = (bIsXTurn) ? xPieceStartX : oPieceStartX
             movedGamePiece.frame.origin.y = (bIsXTurn) ? xPieceStartY : oPieceStartY
+            switchPlayerTurn()
         }
     }
     
@@ -269,7 +278,7 @@ class ViewController: UIViewController {
     // ******         METHODS TO CHANGE PLAYER TURNS        ******
     // ***********************************************************
     
-    // swittch the player turn
+    // switch the player turn
     private func switchPlayerTurn() {
         // switch current player
         bIsXTurn = !bIsXTurn
@@ -382,7 +391,7 @@ class ViewController: UIViewController {
     // ***********************************************************
     
     // handle game over
-    func gameOver() {
+    func processGameOver() {
         // set winning player
         if (isWinForO()) {
             winningPlayer = Piece.o
