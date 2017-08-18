@@ -11,13 +11,7 @@ import AVFoundation
 
 class GameViewController: UIViewController {
     
-    
-    // TODO
-    // extract attributions into README
-    // better sound start move?
-    // custom launch screen
-    
-    
+
     // enum for status of a game slot
     enum Piece {
         case x
